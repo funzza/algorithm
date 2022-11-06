@@ -1,6 +1,5 @@
-## subject1
+## subject1 常数时间的操作
 
-**常数时间的操作**
 
 *一个操作如果和样本的数据量没有关系，每次都是固定时间内完成的操作，叫做常数操作*
 
@@ -11,9 +10,8 @@
 评价一个算法流程的好坏，先看时间复杂度的指标，然后再分析不同数据样本下的实际运行时间，也就是“常数项时间”。
 
 
-## subject2
+## subject2 选择排序、冒泡排序细节与复杂度分析
 
-**选择排序、冒泡排序细节与复杂度分析**
 
 ### 选择排序
 
@@ -72,9 +70,8 @@ code:
     }
 ````
 
-## subject3
+## subject3 异或运算 （^）
 
-### 异或运算 （^）
 *相同为0不同为1*
 
 **还可以理解为无进位相加**
@@ -152,5 +149,158 @@ class Solution {
 拓展：
 
 给定一个非空整数数组，除了某两个元素只出现一次以外，其余每个元素均出现两次。找出那两个只出现了一次的元素。
+
+题解：
+
+    首先，将整个数组异或一边，得到的结果为两个只出现一次元素的异或结果。
+    设这两个元素分别为a和b,结果为result，则result = a ^ b。
+    因为a、b不相等，所以a、b的二进制值必然至少有一位不相等。
+    而相等的元素其二进制值每一位都相等。
+    我们不妨以a、b不相等的一位做区分，将元素分为在那一位为0的和在那一位为1的，相同的元素必然只会出现一组中，所以任意一组的除a、b外其它相同元素的个数都是偶数个。
+    此时，元素被分为了两组，a、b不在一组中，那么将任意一组进行异或操作，最后的结果就是a或b。
+    此时得到的结果与result进行异或，则找到另一个只出现一次的元素。
+
+code:
+
+````java
+    public static void printOddTimesNum2(int[] arr) {
+        int eor = 0;
+        for (int curNum : arr) {
+            eor ^= curNum;
+        }
+
+        // 一个数取反后 得到的结果与原数的每一位都相反
+        // 在取反的这个结果上再加上1,则至少有一位与原数相同
+        // 而这一位就是这个数最右边的一个1（这里不能准确的总结出相关的数学规律，
+        // 可以写几个数代入尝试）
+        // 原数与补码（取反+1）进行与运算，得到其它位为0，原数最右最右边的一个1保留的数
+        int onlyOne1 = 0;
+        int rightOne = eor & (~eor + 1);        
+        for (int cur : arr) {
+            // 与运算：同1得1，其余得0
+            // 所以，这里能够找到原数组中在那一位为0的数
+            // 也就是说我们完成了分组的目的，将其全部进行异或，得到其中一个结果
+            if ((cur & rightOne) == 0) {
+                onlyOne1 ^= cur;
+            }
+        }
+
+        int onlyOne2 = eor ^ onlyOne1;
+
+        System.out.println(onlyOne1 + "&" + onlyOne2);
+    }
+````
+
+## subject4 插入排序
+插入排序的基本思想是将一个记录插入到已经排好序的有序数组中，从而扩充该有序数组，直至这个有序数组的长度与需要排序的数组长度相等。
+
+具体做法：
+
+从有序数组的边界相邻后一个元素从右向左与有序数组的每一位进行比较，如果比数组中的元素值小，则两两交换。当遍历只位置为1或不比当前比较的有序数组中的元素值小则停止比较，有序数组长度+1。直至这个有序数组的长度与需要排序的数组长度相等。
+
+*时间复杂度O(N^2)，额外空间复杂度O(1)*
+
+当一个数组本身有序的时候，算法时间复杂度是O(N)。当我们要对一个大部分元素有序的数组进行排序时，可以使用插入排序。
+
+code:
+````java
+    public static void sort(int[] arr) {
+
+        for (int i = 1; i < arr.length; i++) {
+            for (int j = i; j > 0 && arr[j] < arr[j - 1]; j--) {
+                swap(arr, j, j - 1);
+            }
+        }
+    }
+````
+
+## subject5 二分法
+
+### *在一个有序数组中，找某个数是否存在*
+
+code:
+````java
+    public static int exist(int[] arr, int num) {
+
+        int left = 0;
+        int right = arr.length - 1;
+        int middle = ((right - left) >> 1) + left;
+
+        while(left <= right) {
+            if (num > arr[middle]) {
+                left = middle + 1;
+                middle = ((right - left) >> 1) + left;
+            } else if (num < arr[middle]) {
+                right = middle - 1;
+                middle = ((right - left) >> 1) + left;
+            } else {
+                return middle;
+            }
+        }
+
+        return -1;
+    }
+````
+
+
+### *在一个有序数组中，找 >= 某个数最左侧的位置*
+
+````java
+    public static int neartLeft(int[] arr, int num) {
+
+        int left = 0;
+        int right = arr.length - 1;
+        int middle = ((right - left) >> 1) + left;
+        int result = Integer.MAX_VALUE;
+
+        while (left <= right) {
+            if (num > arr[middle]) {
+                left = middle + 1;
+                middle = ((right - left) >> 1) + left;
+            } else if (num < arr[middle]) {
+                right = middle - 1;
+                middle = ((right - left) >> 1) + left;
+            } else {
+                result = middle;
+                right = middle - 1;
+                middle = ((right - left) >> 1) + left;
+            }
+        }
+
+        if (result < Integer.MAX_VALUE) {
+            return result;
+        } else {
+            return -1;
+        }
+    }
+````
+
+
+### *局部最小值问题*
+
+
+给定一个无序数组，相邻两个数一定不相等
+
+局部最小：
+
+    * 0位置的元素比1位置的元素小，则0位置的元素为局部最小
+    * n-1位置的元素比n-2位置的元素小，则n-1位置的元素为局部最小
+    * i位置的元素比i-1、i+1位置的元素小，则i位置的元素为局部最小
+
+
+## subject6 对数器
+
+    * 有一个需要测试的方法A
+    * 有一个实现复杂度不好，但是容易实现的方法B
+    * 实现一个随机样本产生器
+    * 把方法A和方法B跑相同的随机样本，看看得到的结果是否一样
+    * 如果有一个随机样本使得比对结果不一致，打印样本进行人工干预
+    * 当样本数量很多时比对测试依然正确，可以确定方法A已经正确
+
+
+
+
+
+
 
 

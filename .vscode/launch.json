@@ -1,0 +1,63 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Code05_BSNeartLeft",
+            "request": "launch",
+            "mainClass": "class001.Code05_BSNeartLeft",
+            "projectName": "algorithm_e75fb810"
+        },
+        {
+            "type": "java",
+            "name": "Launch Code04_BinarySearch",
+            "request": "launch",
+            "mainClass": "class001.Code04_BinarySearch",
+            "projectName": "algorithm_e75fb810"
+        },
+        {
+            "type": "java",
+            "name": "Launch Code03_InsertSort",
+            "request": "launch",
+            "mainClass": "class001.Code03_InsertSort",
+            "projectName": "algorithm_e75fb810"
+        },
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch Code01_SelectSort",
+            "request": "launch",
+            "mainClass": "class001.Code01_SelectSort",
+            "projectName": "algorithm_e75fb810"
+        },
+        {
+            "type": "java",
+            "name": "Launch Code02_BubbleSort",
+            "request": "launch",
+            "mainClass": "class001.Code02_BubbleSort",
+            "projectName": "algorithm_e75fb810"
+        },
+        {
+            "type": "java",
+            "name": "Launch Code07_EvenTimesOddTimes",
+            "request": "launch",
+            "mainClass": "class001.Code07_EvenTimesOddTimes",
+            "projectName": "algorithm_e75fb810"
+        },
+        {
+            "type": "java",
+            "name": "Launch Test",
+            "request": "launch",
+            "mainClass": "class001.Test",
+            "projectName": "algorithm_e75fb810"
+        }
+    ]
+}
