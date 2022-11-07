@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Code06_NetherlandsFlag",
+            "request": "launch",
+            "mainClass": "class002.Code06_NetherlandsFlag",
+            "projectName": "algorithm_e75fb810"
+        },
+        {
+            "type": "java",
+            "name": "Launch Code02_SmallSum",
+            "request": "launch",
+            "mainClass": "class002.Code02_SmallSum",
+            "projectName": "algorithm_e75fb810"
+        },
+        {
+            "type": "java",
             "name": "Launch Code01_MergeSort",
             "request": "launch",
             "mainClass": "class002.Code01_MergeSort",
