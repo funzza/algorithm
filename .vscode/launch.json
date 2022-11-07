@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Code01_MergeSort",
+            "request": "launch",
+            "mainClass": "class002.Code01_MergeSort",
+            "projectName": "algorithm_e75fb810"
+        },
+        {
+            "type": "java",
+            "name": "Launch Code08_GetMax",
+            "request": "launch",
+            "mainClass": "class001.Code08_GetMax",
+            "projectName": "algorithm_e75fb810"
+        },
+        {
+            "type": "java",
             "name": "Launch Code05_BSNeartLeft",
             "request": "launch",
             "mainClass": "class001.Code05_BSNeartLeft",
